@@ -3,7 +3,7 @@
 <br />
 
 ## Random Creature Generator
-Ce repo présente le projet Unity présenté lors de l'évènement OpenTalk le 13 mai 2020. 
+Ce repo présente le projet Unity crée lors de l'évènement OpenTalk le 13 mai 2020. 
 
 Version de Unity utilisé: 2019.3.0f3
 
