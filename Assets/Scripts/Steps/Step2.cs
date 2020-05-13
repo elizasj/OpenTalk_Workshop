@@ -54,6 +54,16 @@ public class Step2 : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             int randShape = Random.Range(0, shapes.Count);
+
+            GameObject go = Instantiate(shapes[randShape], new Vector3(Random.Range(0.35f, 3.0f), Random.Range(-1.0f, 3.0f), Random.Range(-1.0f, 3.0f)), Quaternion.identity);
+            GameObject go2 = Instantiate(shapes[randShape], new Vector3(-go.transform.position.x, go.transform.position.y, go.transform.position.z), Quaternion.identity);
+
+            go.transform.parent = left.transform;
+            go2.transform.parent = right.transform;
+
+            go.SetActive(true);
+            go2.SetActive(true);
+
         }
 
     }

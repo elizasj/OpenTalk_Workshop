@@ -53,7 +53,7 @@ public class Step1 : MonoBehaviour
         // loop to generate creature parts
         for (int i = 0; i < 10; i++)
         {
-
+            int randShape = Random.Range(0, shapes.Count);
         }
 
     }

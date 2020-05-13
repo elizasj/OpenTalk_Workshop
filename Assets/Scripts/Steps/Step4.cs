@@ -50,8 +50,10 @@ public class Step4 : MonoBehaviour
         left.transform.parent = parent.transform;
         right.transform.parent = parent.transform;
 
+        int elements = Random.Range(10, 50);
+
         // loop to generate creature parts
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < elements; i++)
         {
             int randShape = Random.Range(0, shapes.Count);
 

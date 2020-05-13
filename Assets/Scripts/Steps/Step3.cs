@@ -35,7 +35,7 @@ public class Step3 : MonoBehaviour
         Destroy(parent);
 
         // choose random material
-        // Material material = (Material)materials[Random.Range(0, materials.Length)];
+        Material material = (Material)materials[Random.Range(0, materials.Length)];
 
         // Skeleton 
         parent = new GameObject();
@@ -57,6 +57,10 @@ public class Step3 : MonoBehaviour
 
             GameObject go = Instantiate(shapes[randShape], new Vector3(Random.Range(0.35f, 3.0f), Random.Range(-1.0f, 3.0f), Random.Range(-1.0f, 3.0f)), Quaternion.identity);
             GameObject go2 = Instantiate(shapes[randShape], new Vector3(-go.transform.position.x, go.transform.position.y, go.transform.position.z), Quaternion.identity);
+
+            // add color
+            go.GetComponent<Renderer>().material = material;
+            go2.GetComponent<Renderer>().material = material;
 
             go.transform.parent = left.transform;
             go2.transform.parent = right.transform;
