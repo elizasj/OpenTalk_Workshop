@@ -15,6 +15,9 @@ public class Generator : MonoBehaviour
     public List<GameObject> shapes;
     private Object[] materials;
 
+    public float speed = 2f;
+    public float maxRotation = 45f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +37,7 @@ public class Generator : MonoBehaviour
         Destroy(parent);
 
         // choose random material
-        // Material material = (Material)materials[Random.Range(0, materials.Length)];
+        Material material = (Material)materials[Random.Range(0, materials.Length)];
 
         // Skeleton 
         parent = new GameObject();
@@ -49,9 +52,32 @@ public class Generator : MonoBehaviour
         left.transform.parent = parent.transform;
         right.transform.parent = parent.transform;
 
+        int elements = Random.Range(10, 50);
+
         // loop to generate creature parts
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < elements; i++)
         {
+            int randShape = Random.Range(0, shapes.Count);
+            float scale = Random.Range(0.25f, 1.25f);
+            float randRotation = Random.Range(-360.0f, 360.0f);
+
+            GameObject go = Instantiate(shapes[randShape], new Vector3(Random.Range(0.35f, 3.0f), Random.Range(-1.0f, 3.0f), Random.Range(-1.0f, 3.0f)), Quaternion.identity);
+            GameObject go2 = Instantiate(shapes[randShape], new Vector3(-go.transform.position.x, go.transform.position.y, go.transform.position.z), Quaternion.identity);
+
+            go.transform.localScale = new Vector3(scale, scale, scale);
+            go2.transform.localScale = new Vector3(-go.transform.localScale.x, go.transform.localScale.y, go.transform.localScale.z);
+
+            go.transform.rotation = Quaternion.Euler(0, 0, randRotation);
+            go2.transform.rotation = Quaternion.Inverse(go.transform.rotation);
+
+            go.GetComponent<Renderer>().material = material;
+            go2.GetComponent<Renderer>().material = material;
+
+            go.transform.parent = left.transform;
+            go2.transform.parent = right.transform;
+
+            go.SetActive(true);
+            go2.SetActive(true);
 
         }
 
@@ -60,6 +86,7 @@ public class Generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        left.transform.rotation = Quaternion.Euler(0f, maxRotation * Mathf.Sin(Time.time * speed) , 0f);
+        right.transform.rotation = Quaternion.Euler(0f, maxRotation * -Mathf.Sin(Time.time * speed), 0f);
     }
 }
